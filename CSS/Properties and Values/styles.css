@@ -1,0 +1,22 @@
+h1 {
+    color: #ff0000; /* red */
+    font-family: Arial, sans-serif;
+    font-size: 28px;
+    text-align: center;
+}
+
+p {
+    color: #008000; /* green */
+    font-family: 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.box {
+    background-color: #ffff00; /* yellow */
+    border: 2px solid #000000; /* black */
+    padding: 20px;
+    margin: 10px;
+    width: 200px;
+    height: 100px;
+}

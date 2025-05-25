@@ -1,0 +1,28 @@
+/* Element selector */
+h1 {
+    color: red;
+}
+
+/* Class selector */
+.main-heading {
+    font-size: 30px;
+}
+
+/* ID selector */
+#intro {
+    font-style: italic;
+}
+
+/* Class selector */
+.highlight {
+    background-color: yellow;
+}
+
+/* Attribute selectors */
+a[href^="https"] {
+    color: blue;
+}
+
+a[href$=".html"] {
+    color: green;
+}
