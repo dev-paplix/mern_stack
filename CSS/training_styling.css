@@ -1,0 +1,63 @@
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    padding: 0;
+    background-color: blueviolet;
+    margin-top: 2%;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+}
+
+.box1 {
+    width: 10%;
+    height: Auto;
+    margin: 20px;
+    border: 5px solid black;
+    padding: 15px;
+    background-color: lightblue;
+    
+}
+
+
+.box1 p {
+    font-size: 1.2em;
+    color: darkblue;
+}
+
+.button {
+    background-color: brown; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #45a049; /* Darker green on hover */
+    color: black; /* Change text color on hover */
+    opacity: 0.5;
+}
+
+.box2 {
+    width: 200px;
+    height: 100px;
+    margin: 40px;
+    border: 5px solid black;
+    padding: 30px;
+    background-color: lightgreen;
+}
