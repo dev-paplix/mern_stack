@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>About Us</title>
+    </head>
+    <body>
+        <h1>About Us form</h1>
+    </body>
+    <div id="about-form">
+        <form action="/submit" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email"><br><br>
+
+            <label for="message">Gender:</label><br>
+            <div>
+                <input type="radio" id="html" name="fav_language" value="HTML">
+                <label for="html">HTML</label><br>
+                <input type="radio" id="css" name="fav_language" value="CSS">
+                <label for="css">CSS</label><br>
+                <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+                <label for="javascript">JavaScript</label>
+            </div>
+            <div id="checkbox">
+                <input type="checkbox" id="subscribe" name="subscribe" value="yes">Subscribe to newsletter
+            </div>
+            <div id="dropdown">
+                <label for="country">Country:</label>
+                <select id="country" name="country">
+                    <option value="malaysia">Malaysia</option>
+                    <option value="singapore">Singapore</option>
+                    <option value="indonesia">Indonesia</option>
+                    <option value="thailand">Thailand</option>
+                </select>
+            </div>
+            <div id="toggle">
+                <label for="toggle">Toggle:</label>
+                <input type="checkbox" id="toggle" name="toggle" value="on">
+            </div>
+            <div id="datepicker">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date"><br><br>
+            </div>
+            <div id="timepicker">
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time"><br><br>
+            <div>
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="4" cols="50"></textarea><br><br>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    <footer>
+        <p>Copyright © 2025 TV Sarawak</p>
+    </footer>
+</html>
