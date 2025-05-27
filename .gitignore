@@ -8,6 +8,11 @@ logs
 npm-debug.log*
 # Runtime data
 pids
-.env
-env.local
-env
+# .env
+# env.local
+# env
+db
+db/
+/db
+db/*
+*/db

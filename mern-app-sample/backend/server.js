@@ -24,8 +24,8 @@ app.get("/", (req, res) => {
 });
 
 // Users route
-// const usersRouter = require("./routes/users");
-// app.use("/api/users", usersRouter);
+const usersRouter = require("./routes/users");
+app.use("/api/users", usersRouter);
 
 // Start Server
 app.listen(PORT, () => {
