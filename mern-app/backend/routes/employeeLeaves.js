@@ -28,5 +28,15 @@ router.post('/', auth, async (req, res) => {
   res.json(benefit);
 });
 
+// each non medical leave the employee is going to get penalized of rm150 per day or rm20 per hour
+function calculateEmploymentSalary(salary) {
+
+  if (typeLeave = 'annual', 'maternity', 'emergency','compassionate' ) {
+    (salary - 150);
+  } else {
+    return salary;  }
+
+}
+
 module.exports = router;
 
