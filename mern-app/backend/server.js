@@ -40,8 +40,8 @@ const employeeLeavesRouter = require("./routes/employeeLeaves");
 app.use("/api/employee-leaves", employeeLeavesRouter);
 
 // Employee Allowance route
-const employeeAllowanceRouter = require("./routes/employeeAllowances");
-app.use("/api/employee-allowance", employeeAllowanceRouter);
+ const employeeAllowanceRouter = require("./routes/employeeAllowances");
+ app.use("/api/employee-allowance", employeeAllowanceRouter);
 
 // Start Server
 app.listen(PORT, () => {

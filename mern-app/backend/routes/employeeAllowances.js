@@ -30,14 +30,46 @@ router.post('/', auth, async (req, res) => {
     res.json(allowance);
 });
 
-function calculateForLead(allowance) {
+function calculateForLead(leadAllowance) {
   let forLead = 0;
 
-  if (allowance > 1000) {
-    forLead = allowance*0.6;
+  if (leadAllowance > 1000) {
+    forLead = leadAllowance*0.6;
   } 
   
   return forLead;
 }
+
+// Update allowance (PATCH)
+router.patch('/', auth, async (req, res) => {
+  try {
+    const allowanceId = req.query.id;
+    if (!allowanceId) return res.status(400).json({ error: 'Allowance ID is required' });
+
+    const updatedAllowance = await Allowance.findByIdAndUpdate(
+      allowanceId,
+      req.body,
+      { new: true, runValidators: true }
+    );
+    if (!updatedAllowance) return res.status(404).json({ error: 'Allowance not found' });
+    res.json(updatedAllowance);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Delete user (DELETE)
+router.delete('/', auth, async (req, res) => {
+  try {
+    const allowanceId = req.query.id;
+    if (!allowanceId) return res.status(400).json({ error: 'Allowance ID is required' });
+
+    const deletedAllowance = await Allowance.findByIdAndDelete(allowanceId);
+    if (!deletedAllowance) return res.status(404).json({ error: 'Allowance not found' });
+    res.json({ message: 'Allowance deleted', allowanceId });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
 
 module.exports = router;
