@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd backend && npx nodemon server.js",
-    "client": "cd frontend && npm run dev"
+    "server": "cd backend && npm i && npx nodemon server.js",
+    "client": "cd frontend && npm i && npm run dev"
   },
   "dependencies": {
     "concurrently": "^8.0.0"

@@ -36,8 +36,8 @@ const employeeEquipmentsRouter = require("./routes/employeeEquipments");
 app.use("/api/employee-equipments", employeeEquipmentsRouter);
 
 // Employee Leaves route
-const employeeLeavesRouter = require("./routes/employeeLeaves");
-app.use("/api/employee-leaves", employeeLeavesRouter);
+// const employeeLeavesRouter = require("./routes/employeeLeaves");
+// app.use("/api/employee-leaves", employeeLeavesRouter);
 
 // Employee Allowance route
 const employeeAllowanceRouter = require("./routes/employeeAllowances");
