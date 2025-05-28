@@ -3,6 +3,7 @@ const router = express.Router();
 const EmployeeLeave = require('../models/EmployeeLeave');
 const User = require('../models/User');
 
+
 // Get all employee leave with user data
 router.get('/', async (req, res) => {
   const leave = await EmployeeLeave.find().populate('user');
