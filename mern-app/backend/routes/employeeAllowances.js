@@ -19,7 +19,7 @@ router.post('/', auth, async (req, res) => {
   // Calculate amount for Lead based on salary
   const employeesforLead = calculateForLead(employeesAllowanceAmount);
 
-    const allowance = new EmployeeAllowance({
+    const allowance = new Allowance({
         user: userId,
         employeesAllowanceAmount,
         employeesAllowanceReason,
