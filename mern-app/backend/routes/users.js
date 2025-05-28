@@ -36,10 +36,13 @@ router.post('/login', async (req, res) => {
 });
 
 // Update user (PATCH)
-router.patch('/:id', auth, async (req, res) => {
+router.patch('/', auth, async (req, res) => {
   try {
+    const userId = req.query.id;
+    if (!userId) return res.status(400).json({ error: 'User ID is required' });
+
     const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
+      userId,
       req.body,
       { new: true, runValidators: true }
     );
@@ -51,11 +54,14 @@ router.patch('/:id', auth, async (req, res) => {
 });
 
 // Delete user (DELETE)
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/', auth, async (req, res) => {
   try {
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    const userId = req.query.id;
+    if (!userId) return res.status(400).json({ error: 'User ID is required' });
+
+    const deletedUser = await User.findByIdAndDelete(userId);
     if (!deletedUser) return res.status(404).json({ error: 'User not found' });
-    res.json({ message: 'User deleted', userId: req.params.id });
+    res.json({ message: 'User deleted', userId });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
