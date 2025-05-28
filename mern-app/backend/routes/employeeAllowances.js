@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Allowance = require('../models/Allowance');
+const Allowance = require('../models/EmployeeAllowance');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
 
@@ -12,7 +12,7 @@ router.get("/", auth, async (req, res) => {
 
 // Create a new employee allowance
 router.post('/', auth, async (req, res) => {
-  const { userId, employeesAllowanceAmount, employeesAllowanceReason } = req.body;
+  const { userId, employeesAllowanceAmount, employeesAllowanceReason, employeesExtra } = req.body;
   const user = await User.findById(userId);
   if (!user) return res.status(404).json({ error: 'User not found' });
 
@@ -25,3 +25,5 @@ router.post('/', auth, async (req, res) => {
     await allowance.save();
     res.json(allowance);
 });
+
+module.exports = router;

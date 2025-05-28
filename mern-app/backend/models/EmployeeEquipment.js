@@ -18,10 +18,24 @@ const employeeEquipmentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  date : {
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  status: {
     type: String,
-    required: true
-  }
+    enum: ['pending', 'approved', 'rejected'],
+    default: 'pending'
+  },
+  urgency: {
+    type: String,
+    enum: ['low', 'medium', 'high'],
+    default: 'medium'
+  },
+  deadline: {
+    type: Date,
+    required: false
+  },
 });
 
 module.exports = mongoose.model('EmployeeEquipment', employeeEquipmentSchema);

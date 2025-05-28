@@ -31,6 +31,18 @@ app.use("/api/users", usersRouter);
 const employeeBenefitsRouter = require("./routes/employeeBenefits");
 app.use("/api/employee-benefits", employeeBenefitsRouter);
 
+// Employee Equipment route
+const employeeEquipmentsRouter = require("./routes/employeeEquipments");
+app.use("/api/employee-equipments", employeeEquipmentsRouter);
+
+// Employee Leaves route
+const employeeLeavesRouter = require("./routes/employeeLeaves");
+app.use("/api/employee-leaves", employeeLeavesRouter);
+
+// Employee Allowance route
+const employeeAllowanceRouter = require("./routes/employeeAllowances");
+app.use("/api/employee-allowance", employeeAllowanceRouter);
+
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
