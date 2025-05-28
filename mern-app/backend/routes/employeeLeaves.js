@@ -3,7 +3,14 @@ const router = express.Router();
 const EmployeeLeave = require('../models/EmployeeLeave');
 const User = require('../models/User');
 const auth = require('../middleware/auth'); // <-- Import the middleware
+const EmployeeBenefit = require('../models/EmployeeBenefit');
 
+
+// Get all employee benefits with user data
+router.get('/', async (req, res) => {
+  const benefits = await EmployeeBenefit.find().populate('user');
+  res.json(benefits);
+});
 
 // Get all employee leave with user data
 router.get('/', auth ,async (req, res) => {
@@ -27,6 +34,8 @@ router.post('/', auth, async (req, res) => {
   await benefit.save();
   res.json(benefit);
 });
+
+
 
 // each non medical leave the employee is going to get penalized of rm150 per day or rm20 per hour
 function calculateEmploymentSalary(salary) {
