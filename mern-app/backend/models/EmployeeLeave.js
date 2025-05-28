@@ -20,8 +20,12 @@ const employeeLeaveSchema = new mongoose.Schema({
     required: true
   },
   typeLeave: {
+    type: String,
     enum: ['medical', 'annual', 'maternity', 'emergency','compassionate'],
     required: true
+  },
+  leavePenalty: {
+    type : Number
   },
 });
 

@@ -3,14 +3,6 @@ const router = express.Router();
 const EmployeeLeave = require('../models/EmployeeLeave');
 const User = require('../models/User');
 const auth = require('../middleware/auth'); // <-- Import the middleware
-const EmployeeBenefit = require('../models/EmployeeBenefit');
-
-
-// Get all employee benefits with user data
-router.get('/', async (req, res) => {
-  const benefits = await EmployeeBenefit.find().populate('user');
-  res.json(benefits);
-});
 
 // Get all employee leave with user data
 router.get('/', auth ,async (req, res) => {
@@ -24,28 +16,66 @@ router.post('/', auth, async (req, res) => {
   const user = await User.findById(userId);
   if (!user) return res.status(404).json({ error: 'User not found' });
 
-  const benefit = new EmployeeLeave({
+  // Calculate penalty
+  const leavePenalty = calculateEmploymentPenalty(durationLeave);
+
+  const leave = new EmployeeLeave({
     user: userId,
     leaveReason,
     durationLeave,
     typeLeave,
-    durationType
+    durationType,
+    leavePenalty
   });
-  await benefit.save();
-  res.json(benefit);
+  await leave.save();
+  res.json(leave);
 });
 
 
 
+
 // each non medical leave the employee is going to get penalized of rm150 per day or rm20 per hour
-function calculateEmploymentSalary(salary) {
+function calculateEmploymentPenalty(penalty) {
 
   if (typeLeave = 'annual', 'maternity', 'emergency','compassionate' ) {
-    (salary - 150);
+    let penalty = 0;
+    (penalty + 150);
   } else {
-    return salary;  }
+    return penalty;  }
 
 }
+
+// // Update user (PATCH)
+router.patch('/', auth, async (req, res) => {
+  try {
+    const leaveId = req.query.id;
+    if (!leaveId) return res.status(400).json({ error: 'Leave ID is required' });
+
+    const updatedLeave = await EmployeeLeave.findByIdAndUpdate(
+      leaveId,
+      req.body,
+      { new: true, runValidators: true }
+    );
+    if (!updatedLeave) return res.status(404).json({ error: 'Leave not found' });
+    res.json(updatedLeave);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Delete user (DELETE)
+router.delete('/', auth, async (req, res) => {
+  try {
+    const leaveId = req.query.id;
+    if (!leaveId) return res.status(400).json({ error: 'Leave ID is required' });
+
+    const deletedLeave = await EmployeeLeave.findByIdAndDelete(leaveId);
+    if (!deletedLeave) return res.status(404).json({ error: 'Leave not found' });
+    res.json({ message: 'Leave deleted', leaveId });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
 
 module.exports = router;
 
