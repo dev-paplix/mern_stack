@@ -27,6 +27,10 @@ app.get("/", (req, res) => {
 const usersRouter = require("./routes/users");
 app.use("/api/users", usersRouter);
 
+// Employee Benefits route
+const employeeBenefitsRouter = require("./routes/employeeBenefits");
+app.use("/api/employee-benefits", employeeBenefitsRouter);
+
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
