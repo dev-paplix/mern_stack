@@ -47,5 +47,37 @@ function calculateEmploymentSalary(salary) {
 
 }
 
+// Update user (PATCH)
+router.patch('/', auth, async (req, res) => {
+  try {
+    const userId = req.query.id;
+    if (!userId) return res.status(400).json({ error: 'Leave ID is required' });
+
+    const updatedLeave = await User.findByIdAndUpdate(
+      userId,
+      req.body,
+      { new: true, runValidators: true }
+    );
+    if (!updatedLeave) return res.status(404).json({ error: 'Leave not found' });
+    res.json(updatedLeave);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Delete user (DELETE)
+router.delete('/', auth, async (req, res) => {
+  try {
+    const userId = req.query.id;
+    if (!userId) return res.status(400).json({ error: 'Leave ID is required' });
+
+    const deletedLeave = await User.findByIdAndDelete(userId);
+    if (!deletedLeave) return res.status(404).json({ error: 'Leave not found' });
+    res.json({ message: 'Leave deleted', userId });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 module.exports = router;
 
