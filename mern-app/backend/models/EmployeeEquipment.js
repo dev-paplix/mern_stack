@@ -36,6 +36,14 @@ const employeeEquipmentSchema = new mongoose.Schema({
     type: Date,
     required: false
   },
+  equipmentPrice: {
+    type: Number,
+    required: true
+  },
+  coverPrice: {
+    type: Number,
+    default: 0
+  }
 });
 
 module.exports = mongoose.model('EmployeeEquipment', employeeEquipmentSchema);

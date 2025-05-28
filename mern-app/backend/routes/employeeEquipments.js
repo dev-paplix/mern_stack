@@ -10,9 +10,11 @@ router.get('/', auth, async (req, res) => {
 });
 
 router.post('/', auth, async (req, res) => {
-  const { userId, equipmentName, quantity, reason, deadline, status, urgency } = req.body;
+  const { userId, equipmentName, quantity, reason, deadline, status, urgency, equipmentPrice } = req.body;
   const user = await User.findById(userId);
   if (!user) return res.status(404).json({ error: 'User not found' });
+
+  const coverPrice = checkEquipmentPrice(equipmentPrice);
 
   const equipment = new EmployeeEquipment({
     user: userId,
@@ -22,9 +24,20 @@ router.post('/', auth, async (req, res) => {
     deadline,
     status: status || 'pending',
     urgency: urgency || 'medium',
+    equipmentPrice,
+    coverPrice
   });
   await equipment.save();
   res.json(equipment);
 });
+
+function checkEquipmentPrice(price) {
+  let empCoverPrice = 0;
+  if(price > 1000) {
+    empCoverPrice = price * 0.5;
+  }
+
+  return empCoverPrice;
+}
 
 module.exports = router;
