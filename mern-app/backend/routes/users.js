@@ -35,4 +35,30 @@ router.post('/login', async (req, res) => {
   res.json({ userId: user._id, token });
 });
 
+// Update user (PATCH)
+router.patch('/:id', auth, async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+    if (!updatedUser) return res.status(404).json({ error: 'User not found' });
+    res.json(updatedUser);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Delete user (DELETE)
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    if (!deletedUser) return res.status(404).json({ error: 'User not found' });
+    res.json({ message: 'User deleted', userId: req.params.id });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 module.exports = router;
