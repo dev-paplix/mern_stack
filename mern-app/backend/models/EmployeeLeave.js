@@ -7,17 +7,22 @@ const employeeLeaveSchema = new mongoose.Schema({
     required: true
   },
   leaveReason: {
-    type: text,
+    type: String,
     required: true
   },
   durationLeave: {
     type: Number,
     required: true
   },
-  typeLeave: {
-    type: text,
+  durationType: {
+    type: String,
+    enum: ['days', 'hours', 'weeks', 'months'],
     required: true
-  }
+  },
+  typeLeave: {
+    type: String,
+    required: true
+  },
 });
 
 module.exports = mongoose.model('EmployeeLeave', employeeLeaveSchema);

@@ -5,12 +5,12 @@ const User = require('../models/User');
 const auth = require('../middleware/auth');
 
 router.get('/', auth, async (req, res) => {
-  const equipment = await EmployeeEquipment.find().populate('user');
+  const equipment = await EmployeeEquipment.find().populate("user");
   res.json(equipment);
 });
 
 router.post('/', auth, async (req, res) => {
-  const { userId, equipmentName, quantity, reason, date } = req.body;
+  const { userId, equipmentName, quantity, reason, deadline, status, urgency } = req.body;
   const user = await User.findById(userId);
   if (!user) return res.status(404).json({ error: 'User not found' });
 
@@ -19,7 +19,9 @@ router.post('/', auth, async (req, res) => {
     equipmentName,
     quantity,
     reason,
-    date
+    deadline,
+    status: status || 'pending',
+    urgency: urgency || 'medium',
   });
   await equipment.save();
   res.json(equipment);
