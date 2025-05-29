@@ -1,11 +1,16 @@
-
 import { alpha } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import AppNavbar from './components/AppNavbar';
 import Header from './components/Header';
-import MainGrid from './components/MainGrid';
+import { useState } from 'react';
+// importing pages
+import AdminHome from './Pages/AdminHome';
+import AdminAllowance from './Pages/AdminAllowance';
+import AdminEquipment from './Pages/AdminEquipment';
+import AdminLeave from './Pages/AdminLeave';
+// end of importing pages
 import SideMenu from './components/SideMenu';
 import AppTheme from '../shared-theme/AppTheme';
 import {
@@ -22,14 +27,23 @@ const xThemeComponents = {
   ...treeViewCustomizations,
 };
 
+const pageComponents = {
+  'Home': <AdminHome />,
+  'Approve Leave': <AdminLeave />,
+  'Approve Equipment': <AdminEquipment />,
+  'Approve Allowance': <AdminAllowance />,
+};
+
 export default function DashboardAdmin(props) {
+  const [selectedPage, setSelectedPage] = useState('Home');
+
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: 'flex' }}>
-        <SideMenu />
+        <SideMenu selectedPage={selectedPage} setSelectedPage={setSelectedPage} />
         <AppNavbar />
-        {/* Main content */}
+
         <Box
           component="main"
           sx={(theme) => ({
@@ -50,7 +64,7 @@ export default function DashboardAdmin(props) {
             }}
           >
             <Header />
-            <MainGrid />
+            {pageComponents[selectedPage]}
           </Stack>
         </Box>
       </Box>

@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,10 +11,48 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import Typography from '@mui/material/Typography';
-import './signIn.css'
+import './signIn.css';
+// import dotenv from 'dotenv';
+// dotenv.config();
 
+const BACKEND_URI = "http://localhost:5000/api";
 
 export default function SingIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  console.log('BACKEND_URI:', BACKEND_URI);
+
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      const response = await fetch(`${BACKEND_URI}/users/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      if (!response.ok) throw new Error('Login failed');
+      const data = await response.json();
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('userId', data.userId);
+      localStorage.setItem('isAdmin', data.isAdmin);
+
+      console.log('Login successful:', data);
+      
+      if (data.isAdmin) {
+        navigate('/admin/dashboard');
+      } else {
+        navigate('/employee/dashboard');
+      }
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <Grid container component="main" className="signin-root">
       <CssBaseline />
@@ -25,7 +65,7 @@ export default function SingIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className="signin-form" noValidate>
+          <form className="signin-form" noValidate onSubmit={handleLogin}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -36,6 +76,8 @@ export default function SingIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={e => setEmail(e.target.value)}
             />
             <TextField
               variant="outlined"
@@ -47,11 +89,18 @@ export default function SingIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            {error && (
+              <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+                {error}
+              </Typography>
+            )}
             <Button
               type="submit"
               fullWidth
@@ -73,7 +122,6 @@ export default function SingIn() {
                 </Link>
               </Grid>
             </Grid>
-
           </form>
         </div>
       </Grid>
