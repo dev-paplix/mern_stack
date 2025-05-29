@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -12,18 +12,20 @@ import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
+import SimpleDialogDemo from './SampleDialog';
+
 
 const mainListItems = [
   { text: 'Home', icon: <HomeRoundedIcon /> },
-  { text: 'Analytics', icon: <AnalyticsRoundedIcon /> },
-  { text: 'Clients', icon: <PeopleRoundedIcon /> },
-  { text: 'Tasks', icon: <AssignmentRoundedIcon /> },
+  { text: 'Analytics', icon: <AnalyticsRoundedIcon />  },
+  { text: 'Clients', icon: <PeopleRoundedIcon />  },
+  { text: 'Tasks', icon: <AssignmentRoundedIcon />  },
 ];
 
 const secondaryListItems = [
-  { text: 'Settings', icon: <SettingsRoundedIcon /> },
-  { text: 'About', icon: <InfoRoundedIcon /> },
-  { text: 'Feedback', icon: <HelpRoundedIcon /> },
+  { text: 'Approve Leave', icon: <SettingsRoundedIcon /> },
+  { text: 'Approve Equipment', icon: <InfoRoundedIcon /> },
+  { text: 'Approve Allowance', icon: <HelpRoundedIcon /> },
 ];
 
 export default function MenuContent() {
@@ -31,10 +33,19 @@ export default function MenuContent() {
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
       <List dense>
         {mainListItems.map((item, index) => (
+          
           <ListItem key={index} disablePadding sx={{ display: 'block' }}>
-            <ListItemButton selected={index === 0}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
+            <ListItemButton
+              onClick={() => {
+                console.log(`Navigating to ${item.text}`);
+              }}
+            
+            selected={item.text ===  "Home" ? true : false} 
+            >
+
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+
             </ListItemButton>
           </ListItem>
         ))}
