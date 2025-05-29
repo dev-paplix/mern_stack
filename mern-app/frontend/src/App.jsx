@@ -1,42 +1,20 @@
 import { Routes, Route, Link } from 'react-router-dom'
-import { useState } from 'react'
+import SingIn from './pages/Auth/signIn'
+import Zain from './pages/TrainingPages/Zain'
+import Izzah from './pages/TrainingPages/Izzah'
+import Keyin from './pages/TrainingPages/Keyin'
 import './App.css'
 
-function Home() {
-  return <h2>Home Page</h2>
-}
-
-function About() {
-  return <h2>About Page</h2>
-}
-
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
     <>
-      <nav>
-        <Link to="/">Home</Link> |{' '}
-        <Link to="/about">About</Link>
-      </nav>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Home />
-              <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                  count is {count}
-                </button>
-                <p>
-                  Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
-              </div>
-            </>
-          }
-        />
-        <Route path="/about" element={<About />} />
+
+        <Route path="/" element={<SingIn />} />
+        <Route path="/training/zain" element={<Zain />} />
+        <Route path="/training/izzah" element={<Izzah />} />
+        <Route path="/training/keyin" element={<Keyin />} />
+
       </Routes>
     </>
   )
