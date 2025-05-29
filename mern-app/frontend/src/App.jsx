@@ -4,7 +4,7 @@ import Zain from './pages/TrainingPages/Zain'
 import Izzah from './pages/TrainingPages/Izzah'
 import Keyin from './pages/TrainingPages/Keyin'
 import './App.css'
-import Dashboard from './pages/AdminDashboard/dashboard/Dashboard'
+import DashboardAdmin from './pages/AdminDashboard/dashboard/DashboardAdmin'
 
 const App = () => {
   return (
@@ -15,7 +15,7 @@ const App = () => {
         <Route path="/training/zain" element={<Zain />} />
         <Route path="/training/izzah" element={<Izzah />} />
         <Route path="/training/keyin" element={<Keyin />} />
-        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/dashboard" element={<DashboardAdmin />} />
       
       </Routes>
     </>
