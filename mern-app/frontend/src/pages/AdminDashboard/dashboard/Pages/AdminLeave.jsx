@@ -1,13 +1,17 @@
 import LeaveTable from "../components/LeaveTable"
+import AddEquipmentButton from "../components/AddEquipmentButton.jsx"
+import Box from '@mui/material/Box';
 
-
-const AdminLeave = () => {
+const AdminEquipment = () => {
   return (
     <div>
-      <h2>Leave Table</h2>
-      <LeaveTable />      
+      <h1>Equipment Table</h1>
+      <LeaveTable/>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+        <MyCard />
+      </Box>
     </div>
   )
 }
 
-export default AdminLeave
+export default AdminEquipment

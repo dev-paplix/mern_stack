@@ -1,75 +1,125 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
-import InsightsRoundedIcon from '@mui/icons-material/InsightsRounded';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
-import AccessibilityIcon from '@mui/icons-material/Accessibility';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import MenuItem from '@mui/material/MenuItem';
+
+import Select from '@mui/material/Select';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { addLeave } from '../../API/items-addleave';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+
+
 
 export default function MyCard() {
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+
+
+  const [role, setRole] = React.useState('');
+
+  const handleChange = (event) => {
+    setRole(event.target.value);
+  };
+
+
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
-    <Card sx={{ height: '100%' }}>
-      <CardContent>
-        <AccessibilityIcon />
-        <Typography
-          component="h2"
-          variant="subtitle2"
-          gutterBottom
-          sx={{ fontWeight: '600' }}
-        >
-          Heres My Button
-        </Typography>
-        <Typography sx={{ color: 'text.secondary', mb: '8px' }}>
-You May Click this button for fun but it does nothing
-        </Typography>
-        <Button
-          variant="contained"
-          size="small"
-          color="primary"
-          endIcon={<ChevronRightRoundedIcon />}
-          fullWidth={isSmallScreen}
-        >
-       Click
-        </Button>
-        <Button
-          variant="contained"
-          size="small"
-          color="primary"
-          endIcon={<ChevronRightRoundedIcon />}
-          fullWidth={isSmallScreen}
-        >
-nothing        </Button>
-        <Button
-          variant="contained"
-          size="small"
-          color="primary"
-          endIcon={<ChevronRightRoundedIcon />}
-          fullWidth={isSmallScreen}
-        >
-happens        </Button>
-        <Button
-          variant="contained"
-          size="small"
-          color="primary"
-          endIcon={<ChevronRightRoundedIcon />}
-          fullWidth={isSmallScreen}
-        >
-at        </Button>
-        <Button
-          variant="contained"
-          size="small"
-          color="primary"
-          endIcon={<ChevronRightRoundedIcon />}
-          fullWidth={isSmallScreen}
-        >
-all        </Button>
-      </CardContent>
-    </Card>
+    <React.Fragment>
+      <Button variant="outlined" onClick={handleClickOpen}>
+        Open form dialog
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        slotProps={{
+          paper: {
+            component: 'form',
+            onSubmit: async (event) => {
+              event.preventDefault();
+              const formData = new FormData(event.currentTarget);
+              const formJson = Object.fromEntries(formData.entries());
+              console.log(formJson);
+              try {
+                await addLeave(formJson);
+                alert('Leave Applied!');
+                handleClose();
+              } catch (err) {
+                alert(err.message);
+              }
+            },
+          },
+        }}
+      >
+        <DialogTitle>Apply Leave Form</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please enter details to apply for leave.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="name"
+            label="Name"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="leaveReason"
+            name="leaveReason"
+            label="leaveReason"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="durationLeave"
+            name="durationLeave"
+            label="durationLeave"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+           <Box sx={{ minWidth: 120, mt : 2,  mb: 2 }}>
+    
+    <InputLabel id="typeLeave">Role</InputLabel>
+    <Select
+      labelId="typeLeave"
+      id="typeLeave"
+      name="typeLeave"
+      label="typeLeave"
+      onChange={handleChange}
+    >
+      <MenuItem value="Accounting">Accounting</MenuItem>
+      <MenuItem value="Marketing & Sale">Marketing & Sale</MenuItem>
+      <MenuItem value="Logistic">Logistic</MenuItem>
+    </Select>
+
+</Box>
+        
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button type="submit">Save</Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
   );
 }
