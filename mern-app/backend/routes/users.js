@@ -32,7 +32,7 @@ router.post('/login', async (req, res) => {
     { expiresIn: '1h' }
   );
 
-  res.json({ userId: user._id, token, isAdmin: user.isAdmin });
+  res.json({ userId: user._id, token, isAdmin: user.isAdmin, role: user.role });
 });
 
 // Update user (PATCH)

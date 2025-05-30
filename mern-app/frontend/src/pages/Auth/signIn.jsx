@@ -40,12 +40,17 @@ export default function SingIn() {
       localStorage.setItem('token', data.token);
       localStorage.setItem('userId', data.userId);
       localStorage.setItem('isAdmin', data.isAdmin);
+      localStorage.setItem('role', data.role);
 
       console.log('Login successful:', data);
       
       if (data.isAdmin) {
         navigate('/admin/dashboard');
-      } else {
+      } 
+      if (data.role == "Accounting") {
+        navigate('/accounting/dashboard');
+      } 
+      else {
         navigate('/employee/dashboard');
       }
     } catch (err) {

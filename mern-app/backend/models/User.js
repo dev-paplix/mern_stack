@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  role: {
+    type: String,
+    enum: ['Accounting','Logistic','Sales and Marketing']
+  },
 });
 
 // Hash password before saving
