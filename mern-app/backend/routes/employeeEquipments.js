@@ -10,7 +10,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 router.post('/', auth, async (req, res) => {
-  const { userId, equipmentName, quantity, reason, deadline, status, urgency, equipmentPrice } = req.body;
+  const { userId, equipmentName, quantity, reason, status, urgency, equipmentPrice } = req.body;
   const user = await User.findById(userId);
   if (!user) return res.status(404).json({ error: 'User not found' });
 
@@ -21,7 +21,6 @@ router.post('/', auth, async (req, res) => {
     equipmentName,
     quantity,
     reason,
-    deadline,
     status: status || 'pending',
     urgency: urgency || 'medium',
     equipmentPrice,
