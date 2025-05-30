@@ -32,7 +32,7 @@ export default function EditEmployee({ open, employee, onClose }) {
       setForm({
         name: employee.name || '',
         email: employee.email || '',
-        password: '',
+        password: employee.password || '',
         phone: employee.phone || '',
         initialBalance: employee.initialBalance || '',
         role: employee.role || '',

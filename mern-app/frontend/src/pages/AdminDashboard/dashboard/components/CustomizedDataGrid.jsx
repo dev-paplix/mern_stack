@@ -10,6 +10,9 @@ import Paper from '@mui/material/Paper';
 import getEmployees from '../../API/getEmployees';
 import EditIcon from '@mui/icons-material/Edit';
 import EditEmployee from './EditEmployee';
+import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteEmployee from './DeleteEmployee';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,6 +36,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function CustomizedTables() {
   const [data, setData] = useState([]);
   const [editOpen, setEditOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   useEffect(() => {
@@ -52,10 +56,21 @@ export default function CustomizedTables() {
     setEditOpen(true);
   };
 
+  const handleDeleteClick = async (employee) => {
+    setSelectedEmployee(employee);
+    setDeleteOpen(true);
+  };
+
   const handleEditClose = () => {
     setEditOpen(false);
     setSelectedEmployee(null);
   };
+
+  const handleDeleteClose = () => {
+    setDeleteOpen(false);
+    setSelectedEmployee(null);
+  };
+
 
   return (
     <>
@@ -69,6 +84,7 @@ export default function CustomizedTables() {
               <StyledTableCell align="right">Phone&nbsp;(+60)</StyledTableCell>
               <StyledTableCell align="right">Initital Balance&nbsp;(RM)</StyledTableCell>
               <StyledTableCell align="right">Edit</StyledTableCell>
+              <StyledTableCell align="right">Delete</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -87,6 +103,12 @@ export default function CustomizedTables() {
                     onClick={() => handleEditClick(row)}
                   />
                 </StyledTableCell>
+                <StyledTableCell align="right">
+                  <DeleteIcon 
+                    style={{ cursor: 'pointer' }} 
+                    onClick={() => handleDeleteClick(row)}
+                  /> 
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
@@ -97,6 +119,14 @@ export default function CustomizedTables() {
           open={editOpen}
           employee={selectedEmployee}
           onClose={handleEditClose}
+        />
+      )}
+
+      {deleteOpen && selectedEmployee && (
+        <DeleteEmployee
+          open={deleteOpen}
+          employee={selectedEmployee}
+          onClose={handleDeleteClose}
         />
       )}
     </>
