@@ -1,9 +1,10 @@
-import React from 'react'
+import EquipmentTable from "../components/EquipmentComponent"
 
 const AdminEquipment = () => {
   return (
     <div>
-      
+      <h1>Equipment Table</h1>
+      <EquipmentTable/>
     </div>
   )
 }
