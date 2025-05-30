@@ -59,7 +59,7 @@ export default function AllowanceTable() {
     fetchData();
     }
   );
-  console.log('data:', data);
+
 
 
   return (

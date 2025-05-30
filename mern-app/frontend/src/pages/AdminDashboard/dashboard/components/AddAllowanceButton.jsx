@@ -10,8 +10,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { addEmployee } from '../../API/items-addallowance';
-import { addAllowance } from '../../API/'
+import { addEmployee } from '../../API/items-add';
+import { addAllowance } from '../../API/items-addallowance';
+
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import Radio from '@mui/material/Radio';
@@ -25,10 +26,10 @@ export default function AddAllowanceButton() {
 
 
 
-  const [role, setRole] = React.useState('');
+  const [user, setUser] = React.useState('');
 
   const handleChange = (event) => {
-    setRole(event.target.value);
+    setUser(event.target.value);
   };
 
 
@@ -70,23 +71,29 @@ export default function AddAllowanceButton() {
           <DialogContentText>
             Please enter details to add allowance.
           </DialogContentText>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="name"
-            label="Name"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
+            <Box sx={{ minWidth: 120, mt : 2,  mb: 2 }}>
+    
+                <InputLabel id="user">Person Name</InputLabel>
+                <Select
+                  labelId="user"
+                  id="userId"
+                  name="userId"
+                  value={user}
+                  label="Name"
+                  onChange={handleChange}
+                >
+                  <MenuItem value="6836b959ce5a559db191806b">milo</MenuItem>
+                  <MenuItem value="6839247e800622b59d9ac23c">kopi</MenuItem>
+  
+                </Select>
+       
+            </Box>
         <TextField
             autoFocus
             required
             margin="dense"
-            id="amount"
-            name="amount"
+            id="employeesAllowanceAmount"
+            name="employeesAllowanceAmount"
             label="Amount"
             type="number"
             fullWidth
@@ -96,8 +103,8 @@ export default function AddAllowanceButton() {
             autoFocus
             required
             margin="dense"
-            id="reason"
-            name="reason"
+            id="employeesAllowanceReason"
+            name="employeesAllowanceReason"
             label="Reason"
             type="text"
             fullWidth
@@ -106,24 +113,14 @@ export default function AddAllowanceButton() {
            <FormLabel id="extra">Extra for Future?</FormLabel>
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
-                name="extra"
-                id="extra"
+                name="employeesExtra"
+                id="employeesExtra"
               >
                 <FormControlLabel value="false" control={<Radio />} label="No" />
                 <FormControlLabel value="true" control={<Radio />} label="Yes" />
 
               </RadioGroup>
-          <TextField
-            autoFocus
-            // required
-            margin="dense"
-            id="forlead"
-            name="forlead"
-            label="Amount for Leader"
-            type="number"
-            fullWidth
-            variant="standard"
-          />
+      
          
         </DialogContent>
         <DialogActions>
