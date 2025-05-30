@@ -17,6 +17,7 @@ export default function Header() {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('isAdmin');
+    localStorage.removeItem('role');
     navigate('/');
   };
 

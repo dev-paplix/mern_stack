@@ -49,7 +49,7 @@ export default function CustomizedTables() {
     fetchData();
     }
   );
-  console.log('data:', data);
+
 
   return (
     <TableContainer component={Paper}>

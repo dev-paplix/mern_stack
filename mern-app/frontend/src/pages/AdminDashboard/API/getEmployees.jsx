@@ -14,7 +14,6 @@ const BACKEND_URI = "http://localhost:5000/api";
             });
             if (!response.ok) throw new Error('failed');
             const data = await response.json();
-            console.log('data:', data);
             return data;
         }
         catch (err) {
