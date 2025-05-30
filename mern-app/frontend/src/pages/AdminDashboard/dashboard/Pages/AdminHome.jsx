@@ -11,6 +11,7 @@ import HighlightedCard from '../components/HighlightedCard';
 import PageViewsBarChart from '../components/PageViewsBarChart';
 import SessionsChart from '../components/SessionsChart';
 import StatCard from '../components/StatCard';
+import AddEmployeeButton from '../components/AddEmployeeButton';
 
 const data = [
   {
@@ -79,7 +80,11 @@ export default function AdminHome() {
       <Grid container spacing={2} columns={12}>
         <Grid size={{ xs: 12, lg: 9 }}>
           <CustomizedTables />
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+            <AddEmployeeButton />
+          </Box>
         </Grid>
+        
         <Grid size={{ xs: 12, lg: 3 }}>
           <Stack gap={2} direction={{ xs: 'column', sm: 'row', lg: 'column' }}>
             <CustomizedTreeView />
