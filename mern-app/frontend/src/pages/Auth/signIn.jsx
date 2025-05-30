@@ -44,14 +44,11 @@ export default function SingIn() {
 
       console.log('Login successful:', data);
       
-      if (data.isAdmin) {
+      if (data.isAdmin == true) {
         navigate('/admin/dashboard');
       } 
-      if (data.role == "Accounting") {
+      if (data.role == "Accounting" && data.isAdmin == false) {
         navigate('/accounting/dashboard');
-      } 
-      else {
-        navigate('/employee/dashboard');
       }
     } catch (err) {
       setError(err.message);
