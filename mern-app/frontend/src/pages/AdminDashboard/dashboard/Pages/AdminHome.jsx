@@ -8,6 +8,7 @@ import ChartUserByCountry from '../components/ChartUserByCountry';
 import CustomizedTreeView from '../components/CustomizedTreeView';
 import CustomizedTables from '../components/CustomizedDataGrid';
 import HighlightedCard from '../components/HighlightedCard';
+import MyCard from '../components/MyCard';
 import PageViewsBarChart from '../components/PageViewsBarChart';
 import SessionsChart from '../components/SessionsChart';
 import StatCard from '../components/StatCard';
@@ -66,6 +67,9 @@ export default function AdminHome() {
         ))}
         <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <HighlightedCard />
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+          <MyCard />
         </Grid>
         <Grid size={{ xs: 12, md: 6 }}>
           <SessionsChart />
